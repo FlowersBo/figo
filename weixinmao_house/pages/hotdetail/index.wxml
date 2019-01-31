@@ -1,0 +1,5 @@
+<!--weixinmao_house/pages/hotdetail/index.wxml-->
+<view class="container">
+  <web-view src="{{siteRoots}}/wxapp/discount/html/{{ids}}"></web-view>
+</view>
+ 

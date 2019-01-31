@@ -1,0 +1,53 @@
+<!--weixinmao_house/pages/evaluate/index.wxml-->
+<view class='evaluate'>
+  <view class='wrap'>
+    <view class='evaluateWrap'>
+      <view class='tesla'>
+        <image src='/weixinmao_house/resource/images/typeface/tesla.jpg'/>
+      </view>
+      <view class='straWrap'>
+        <text style='font-size:30rpx; font-weight:600; white-space:nowrap '>评分：</text>
+        <view class='star'>
+          <block wx:for="{{stars}}" wx:key="index">
+            <image class="star-image" style="left: {{item*90}}rpx" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
+              <view class="item" style="left:0rpx" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
+              <view class="item" style="left:30rpx" data-key="{{item+1}}" bindtap="selectRight"></view>
+            </image>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class="conts">
+      <textarea class="areas" placeholder='留下点评，帮助更多人' minlength="{{min}}" maxlength="{{max}}" bindinput="inputs"> 
+        <text class="currentWordNumber">{{currentWordNumber|0}}/{{max}}</text>
+        <text class="hint">{{texts}}</text>
+      </textarea>
+    </view>
+  </view>
+</view>
+
+<view class="weui-cell"> 
+    <view class="weui-cell__bd"> 
+     <view class="weui-uploader"> 
+      <view class="weui-uploader__hd"> 
+       <view class="weui-uploader__title">晒图：</view> 
+       <view class="weui-uploader__info">{{imageList.length}}/{{count}}</view> 
+      </view> 
+      <view class="weui-uploader__bd"> 
+       <view class="weui-uploader__files"> 
+        <block wx:for="{{imageList}}" wx:for-item="image" wx:key="index"> 
+         <view class="weui-uploader__file"> 
+          <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image> 
+         </view> 
+        </block>
+       </view> 
+       <view class="weui-uploader__input-box"> 
+        <view class="weui-uploader__input" bindtap="chooseImage"></view> 
+       </view>
+      </view> 
+     </view> 
+  </view> 
+</view> 
+<view style='width:100%; height:140rpx; background-color:white;margin-top:30rpx;display: flex;align-items: center; '>
+  <button class='btn' bindtap="submit">提交</button>
+</view>

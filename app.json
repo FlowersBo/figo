@@ -1,0 +1,70 @@
+{
+  "pages": [
+    "weixinmao_house/pages/myOrder/lineItem/index",
+    "weixinmao_house/pages/index/index",
+    "weixinmao_house/pages/evaluate/index",
+    "weixinmao_house/pages/information/index",
+    "weixinmao_house/pages/myOrder/index",
+  
+    "weixinmao_house/pages/salelist/index",
+    "weixinmao_house/pages/idckey/index",
+    "weixinmao_house/pages/map/index",
+    "weixinmao_house/pages/article/index",
+    "weixinmao_house/pages/newsdetail/index",
+    "weixinmao_house/pages/message/index",
+    "weixinmao_house/pages/search/index",
+    "weixinmao_house/pages/user/index",
+    "weixinmao_house/pages/saledetail/index",
+    "weixinmao_house/pages/city/index",
+    "weixinmao_house/pages/citydetail/index",
+    "weixinmao_house/pages/aboutus/index",
+    "weixinmao_house/pages/hotsale/index",
+    "weixinmao_house/pages/worldin/index",
+    "weixinmao_house/pages/hotdetail/index",
+    "weixinmao_house/pages/articledetail/index",
+    "weixinmao_house/pages/networkprovince/index",
+    "weixinmao_house/pages/networkpd/index",
+    "weixinmao_house/pages/citysel/index",
+    "weixinmao_house/pages/cityloc/index",
+    "weixinmao_house/pages/wxlogin/index",
+    "weixinmao_house/pages/userfavorite/index",
+    "weixinmao_house/pages/kkkkkk/index",
+    "weixinmao_house/pages/car/index",
+    "weixinmao_house/pages/serviceProcess/index"
+    
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "飞哥立桩",
+    "navigationBarBackgroundColor": "white",
+    "backgroundColor": "#fff",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#6e6d6b",
+    "selectedColor": "#00c482",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "box-shadow": "0 0 6px 0",
+    "list": [
+      {
+        "pagePath": "weixinmao_house/pages/index/index",
+        "iconPath": "weixinmao_house/resource/images/nav/home-off.png",
+        "selectedIconPath": "weixinmao_house/resource/images/nav/home-on.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "weixinmao_house/pages/hotsale/index",
+        "iconPath": "weixinmao_house/resource/images/nav/information-off.png",
+        "selectedIconPath": "weixinmao_house/resource/images/nav/information-on.png",
+        "text": "资讯"
+      },
+      {
+        "pagePath": "weixinmao_house/pages/user/index",
+        "iconPath": "weixinmao_house/resource/images/nav/user-off.png",
+        "selectedIconPath": "weixinmao_house/resource/images/nav/user-on.png",
+        "text": "我的"
+      }
+    ]
+  }
+}

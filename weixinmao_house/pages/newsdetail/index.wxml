@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view class="container">
+  <web-view src="{{siteRoots}}/wxapp/homepic/html/{{ids}}"></web-view>
+</view>
+ 

@@ -1,0 +1,20 @@
+<!--weixinmao_house/pages/userfavorite/index.wxml-->
+<!--idc机房收藏 begin-->
+<view class="news">
+  <block wx:if="{{idcList}}">
+    <!-- 循环机房信息 -->
+    <view class="listtop" data-id="{{item.idcids}}" bindtap='toSailDetail' wx:for="{{idcList}}" wx:key="index" wx:for-item="item">
+      <image src="{{siteRoots}}{{item.pic?item.pic:'/files/default01.jpg'}}"></image>
+      <view class="des">
+        <view class="title">{{item.title}}</view>
+        <view class="desporlist">
+          <view class="idcpro">机房等级: {{item.level?item.level:''}}</view>
+          <view class="idcpro">总面积：{{item.area?item.area:''}}㎡</view>
+          <view class="idcpro">机柜数量：{{item.num?item.num:''}}个</view>
+          <view class="idcpro">备注：{{item.remark?item.remark:''}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<!--idc机房收藏 end-->

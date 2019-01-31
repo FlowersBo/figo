@@ -1,0 +1,136 @@
+<!--weixinmao_house/pages/newhousedetail/index.wxml-->
+<view class="container">
+    <view class="swiper-container">
+        <swiper class="swiper_box" 
+                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" >
+            <block wx:for="{{piclist}}">
+                <swiper-item>
+                    <image  data-id="" src="{{item}}" class="slide-image" width="750rpx" height="562.5rpx"/>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="dots">  
+            <block wx:for="{{piclist}}" wx:key="index">  
+                <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+            </block>  
+        </view>   
+   </view>
+  <view class="main">
+      <view class="title">
+          <view>{{data.housename}}</view>
+          <view class="price"><view>均价{{data.houseprice}}元/㎡</view><view>{{data.salestatus_str}}</view></view>
+      </view>
+      <view class="address">
+          <view>开 发 商:{{data.companyname}}</view>
+          <view>项目地址:{{data.houseaddress}}</view>
+          <view>售楼地址:{{data.housesaleaddress}}</view>
+      </view>
+      <view class="special">
+          <text wx:for="{{data.speciallist}}">{{item}}</text>
+          
+      </view>
+
+  </view>
+  <view class="contentlist">
+        <view class="title"><view></view><view>楼盘介绍</view></view>
+       
+     <view class="listitem">
+        <view class="items">占地面积:<text>{{data.housecovered}}㎡</text></view>
+        <view class="items">建筑面积:<text>{{data.buildarea}}万㎡</text></view>
+        <view class="items">容积率:<text>{{data.houserate}}</text></view>
+        <view class="items">绿化率:<text>{{data.housegreenrate}}</text></view>
+        <view class="items">开盘时间:<text>{{data.opensaletime}}</text></view>
+        <view class="items">入驻时间:<text>{{data.staytime}}</text></view>
+        <view class="items">项目特色:<text>{{data.specialliststr}}</text></view>
+        <view class="items">所属学区:<text>{{data.houseschool}}</text></view>
+        <view class="items">附近公交:<text>{{data.housebus}}</text></view>
+     </view>
+        
+  </view>
+  <view class="contentlist">
+        <view class="title"><view></view><view>楼盘相册</view></view>
+    
+  </view>
+
+
+
+    <view class="type-container">
+       <scroll-view class="type-navbar" scroll-x="true" style="width: 100%">
+            <view class="type-box" wx:for="{{housepic}}">
+                <view id="{{item.id}}" class="type-navbar-item " bindtap="tabClick">
+                       <image src="{{item.thumb}}"></image>
+
+                </view>
+                
+            </view>
+           
+            
+        </scroll-view>
+        </view>
+
+
+
+
+
+
+
+   <view class="contentlist">
+        <view class="title"><view></view><view>楼盘户型</view></view>
+
+        
+  </view>
+      <view class="type-container">
+       <scroll-view class="type-navbar" scroll-x="true" style="width: 100%">
+            <view class="type-box" wx:for="{{houseplan}}">
+                <view id="{{item.id}}" class="type-navbar-item " bindtap="tabClick">
+                       <image src="{{item.thumb}}"></image>
+
+                </view>
+                
+            </view>
+           
+            
+            
+        </scroll-view>
+        </view>
+
+
+  <view class="contentlist">
+        <view class="title"><view></view><view>楼盘详情</view></view>
+
+        <view class="intro">
+         <block wx:for="{{content}}"  wx:for-index="index"  wx:for-item="cellData">
+      
+        <block  wx:if="{{cellData.type == 'view'}}">
+            <view class="p">
+                <block  wx:for="{{cellData.child}}" wx:key="text">
+                    <block  wx:if="{{item.type == 'a'}}">
+                        <text class="a" data-seccode="{{item.attr['data-seccode']}}" data-secname="{{item.attr['data-secname']}}" bindtap="stockClick">{{item.text}}</text>
+                    </block>
+                    <block  wx:else>
+                        <text>{{item.text}}</text>
+                    </block>
+                </block>
+            </view>
+        </block>
+        <block wx:if="{{cellData.type == 'img'}}">
+         <image  mode="widthFix"  class="img" data-index="{{ index }}" 
+style="width:{{ imagewidth }}px; height:{{ imageheight }}px;"    src="{{cellData.attr.src}}" bindload="imageLoad"></image>        
+
+
+        </block>
+    </block>
+
+        
+        </view>
+  </view>
+
+</view>
+
+
+<view class="weixinmao-float">
+    <view class="weixinmao-foot">
+      <view class="footer" bindtap='goMap' ><image src="../../resource/images/lbs.png"></image>一键导航</view>
+      <view class="footer" bindtap='doCall' data-tel="{{data.tel}}"><image src="../../resource/img/tel.png"></image>售楼电话</view>
+    </view>
+</view>

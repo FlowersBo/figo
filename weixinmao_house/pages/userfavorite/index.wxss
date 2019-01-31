@@ -1,0 +1,163 @@
+/* weixinmao_house/pages/userfavorite/index.wxss */
+.news{
+margin-top:10rpx;
+width:750rpx;
+background: #FFF;
+display: flex;
+flex-direction: column;
+
+}
+.news .newstitle{
+width:750rpx;
+height: 80rpx;
+line-height: 80rpx;
+margin-left:20rpx;
+font-size: .7rem;
+border-bottom: 1rpx solid #efefef;
+margin: 0 auto;
+display: flex;
+flex-direction: row;
+justify-content:space-between;
+
+}
+/* .news .newstitle view:nth-child(1){
+
+  height: 40rpx;
+  line-height: 40rpx;
+  width:6rpx;
+  background:transparent;
+  align-self: flex-start;
+  margin-left: 10rpx;
+} */
+.news .newstitle view:nth-child(1){
+  height: 80rpx;
+  line-height: 80rpx;
+  width:200rpx;
+  padding-left: 15rpx;
+  margin-left: 10rpx; 
+  font-size: .9rem;
+}
+.news .newslist{
+display: flex;
+flex-direction: row;
+width:720rpx;
+height: 50rpx;
+margin: 0 auto;
+/* border-bottom: 1px solid #efefef; */
+padding-top:10rpx;
+padding-bottom:10rpx;
+}
+
+.news .newslist .pic{
+width:35%;
+height: 220rpx;
+line-height: 220rpx;
+align-items: center;
+justify-content: center;
+display: flex;
+}
+.news .newslist .pic image{
+ width:260rpx;
+ height: 190rpx;
+}
+
+.news .newslist .title{
+width:65%;
+flex-direction: column;
+display: flex;
+justify-content: space-between;
+height: 190rpx;
+padding-top: 25rpx;
+}
+.news .newslist .title .address{
+  padding-left: 5%;
+  text-align: left;
+  font-size: .7rem;
+color: #000; 
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: 110rpx;
+}
+
+.news .newslist .title .address view:nth-child(1){
+     height: 30rpx;
+  line-height: 30rpx;
+    font-size: .8rem;
+}
+.news .newslist .title .address view:nth-child(2){
+     height: 30rpx;
+  line-height: 30rpx;
+   color: #979797; 
+}
+
+ .news .newslist .title .address view:nth-child(3){
+      height: 30rpx;
+  line-height: 30rpx;
+   color: #979797; 
+}
+.news .newslist .title .price{
+  padding-left: 5%;
+  text-align: left;
+  font-size: .7rem;
+color: #6a6a6a; 
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+height: 60rpx;
+line-height: 60rpx;
+align-self: baseline;
+width:450rpx;
+}
+.news .newslist .title .price view text{
+  
+padding: 10rpx 15rpx;
+border-radius: 3rpx;
+margin-right: 5rpx;
+height: 20rpx;
+line-height:20rpx; 
+color:#77af6e;
+  background: #f7f5f6;
+
+}
+.news .newslist .title .price .money{
+color:#d65408;
+font-weight:bold;
+font-size: 1rem;
+padding-right: 10rpx;
+}
+
+
+.listtop{
+  box-sizing: content-box;
+  width: 100%;
+  height: 180rpx;
+  padding: 16rpx;
+}
+.listtop .des{
+  box-sizing: border-box;
+  padding: 0 10rpx;
+  margin-left: 190rpx;
+  font-size: .7rem;
+}
+.listtop image{
+  float: left;
+  width: 180rpx;
+  height: 180rpx;
+}
+.listtop .des .title{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 10rpx; 
+  font-size: .9rem;
+}
+.listtop .des .desporlist{
+  margin-left: 0rpx;
+  height: 180rpx;
+  padding: 0 10rpx;
+  font-size: .7rem;
+}
+.listtop .des .desporlist .idcpro{
+  float: left;
+  width: 49.5%;
+}

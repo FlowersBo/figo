@@ -1,0 +1,38 @@
+/* index.wxss */
+.container {
+  background-color: #FFF;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.article{
+  box-sizing: border-box;
+  height: 60rpx;
+  padding: 0 16rpx;
+  margin: 16rpx;
+  /* background: #ff0000; */
+}
+.article .title{
+  display:inline-block;
+width:70%;
+vertical-align:middle;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+font-size:.8rem;
+color:#999999;
+
+}
+.article .time{
+  display:block;
+width:20%;
+vertical-align:middle;
+font-size:.7rem;
+text-align:right;
+color:#cccccc;
+float:right;
+height:60rpx;
+line-height:60rpx;
+overflow: hidden;
+white-space: nowrap;
+}

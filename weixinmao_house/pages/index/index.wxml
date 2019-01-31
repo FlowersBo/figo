@@ -1,0 +1,131 @@
+<!--index.wxml-->
+
+<!--1px = 750/320 = 2.34rpx;-->
+<scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}" style="position: absolute; left: 0; top:0; bottom: 0; right: 0;">
+
+  <view class="container">
+    <view class="+">
+      <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+        <block wx:for="{{focusPic}}" wx:key="index">
+          <swiper-item>
+            <image data-id="{{item.ids}}" src="{{item.pic}}" class="slide-image" bindtap="toNewsDetail" width="750rpx" height="562.5rpx" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="dots">
+        <block wx:for="{{focusPic}}" wx:key="idnex">
+          <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+        </block>
+      </view>
+    </view>
+    <view class='message'>
+      <view class='message-text'>
+        <image src="../../resource/images/typeface/check.png"/>
+        新能源充电设施第三方综合服务商
+      </view>
+       <view class='message-text'>
+        <image src="../../resource/images/typeface/check.png"/>
+        云计算，大数据，物联网
+      </view>
+    </view>
+
+    <view class="navlist">
+    <!-- 我要立桩 -->
+      <view class="item" bindtap='toSaleList'>
+        <image src="../../resource/images/typeface/stakeout.png"></image>
+        <view>我要立桩</view>
+      </view>
+        <!-- 我的订单 -->
+      <view class="item" bindtap='toHotSale'>
+        <image src="../../resource/images/typeface/indent.png"></image>
+        <view>我的订单</view>
+      </view>
+      <!-- 售后服务 -->
+      <view class="item" bindtap='toArticleList'>
+        <image src="../../resource/images/typeface/aftersale.png"></image>
+        <!-- <view>城域网 bindtap='toCity'</view> -->
+        <view>售后服务</view>
+      </view>
+      <!-- 本月活动 -->
+       <!-- <view class="item" bindtap='toHotSale'>
+        <image src="../../resource/images/province.png"></image>
+         <view>省际传输 bindtap='toNetWorkProvince'</view> 
+           <view>本月活动</view>
+      </view>  
+        view class="item" bindtap='toWorldIn'> 
+        <image src="../../resource/images/country.png"></image>
+        <view>国际带宽</view>
+      </view>     -->
+      <!-- 车友圈 -->
+      <view class="item" bindtap='toAboutUs'>
+        <image src="../../resource/images/typeface/car.png"></image>
+        <view>车友圈</view>
+      </view>
+     
+    </view>
+
+    <!--服务流程 begin-->
+      <view class='serviceProcess'>
+        <view class='show' bindtap='serviceProcess'></view>
+        <image src="../../resource/images/typeface/flow.png"/> 
+      </view>
+
+
+    <!-- <view class="news">
+      <view class="newstitle">
+        <view>服务流程</view> -->
+        <!-- <view class="viewmore" bindtap="toArticleList">查看全部 >></view> -->
+        <!-- </view>
+        <view class='swiper-serve'>
+        <swiper class='read_swiper' autoplay="{{swiper.autoplay}}" interval="{{swiper.interval}}" duration="{{swiper.duration}}" current="{{swiper.current}}">
+          <block wx:for="{{servicePic}}" wx:key="index">
+          <swiper-item>
+            <image data-id="{{item.ids}}" src="{{siteRoots}}/{{item.background}}" class="slide-image" bindtap="toLastDetail" bindtap='previewImg'/>
+          </swiper-item>
+         </block>
+        </swiper>
+        <view class='swiper-serve_next' bindtap='prevImg'> 
+          <image src='../../resource/images/typeface/right.png' class='typeface'/>
+        </view>
+        <view class='swiper-serve_prew' bindtap='nextImg'>     
+           <image src='../../resource/images/typeface/left.png' class='typeface'/>
+        </view>
+      </view>
+    </view> -->
+
+    <!--车友圈精选-->
+    <view class="news">
+      <view class="newstitle">
+        <view>车友圈精选</view>
+        <view class="viewmore" bindtap='toAboutUs'>更多>></view> 
+      </view>
+      <block  wx:if="{{idcList}}">
+        <view class='list'  data-id="{{item.ids}}" bindtap='toSailDetail' wx:for="{{idcLists}}" wx:key="index" wx:for-item="item">
+          <view class='list-text'>{{item.title}}</view>
+         <view class='list-img'>
+           <image src="{{item.imgUrl}}"/>
+           <text class='time'>{{item.updatetime}}</text>
+         </view>
+        </view>
+      </block>
+      <!-- <block wx:if="{{idcList}}">
+        <view class="listtop" data-id="{{item.ids}}" bindtap='toSailDetail' wx:for="{{idcList}}" wx:key="index" wx:for-item="item">
+          <image src="{{siteRoots}}{{item.pic?item.pic:'/files/default01.jpg'}}"></image>
+          <view class="des">
+              <view class="title">{{item.title}}</view>
+              <view  class="desporlist">
+                <view class="idcpro">{{item.createtime?item.createtime:''}}</view>
+                <view class='idcpro-wrapper'>
+                  <view class="item">{{item.viewcount?item.viewcount:''}}浏览</view>
+                  <view class='dot'></view>
+                  <view class="item">{{item.likecount?item.likecount:''}}收藏</view> 
+                </view>
+              </view>
+          </view>
+        </view>
+      </block> -->
+    </view>
+    <!--idc机房推荐 end-->
+
+  </view>
+</scroll-view>

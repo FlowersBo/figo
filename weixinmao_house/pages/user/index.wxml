@@ -1,0 +1,21 @@
+<!--weixinmao_hssy/pages/user/index.wxml-->
+<view class="container">
+  <view class="header">
+        <view class="pic">
+          <image src="{{avatarUrl?avatarUrl:'../../resource/images/user_img.png'}}"></image>
+          <view>{{nickName?nickName:''}}</view>
+        </view>
+  </view>
+
+  <view class="list">
+        <view class="item" bindtap="userFavorite">我关注的</view>
+        <view class="item" bindtap="calling">
+          <view class="titlename">客服电话</view>
+          <view class="telnumber" >{{customerManagerIphone}}</view>
+        </view>
+        <view class="item" bindtap="toMessage">我要留言</view>
+  </view>
+  <view class="listlgout">
+        <!-- <view class="item" bindtap="logout">退出登录</view>  -->
+  </view>
+</view>

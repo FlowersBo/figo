@@ -1,0 +1,16 @@
+<!--weixinmao_house/pages/car/index.wxml-->
+ <view class="news">
+      <view class="newstitle">
+        <view>车友圈</view>
+        <!-- <view class="viewmore" >更多>></view>  -->
+      </view>
+      <block>
+        <view class='list'  data-id="{{item.ids}}" bindtap='toSailDetail' wx:for="{{idcLists}}" wx:key="index" wx:for-item="item">
+          <view class='list-text'>{{item.title}}</view>
+         <view class='list-img'>
+           <image src="{{item.imgUrl}}"/>
+           <text class='time'>{{item.updatetime}}</text>
+         </view>
+        </view>
+      </block>
+    </view>

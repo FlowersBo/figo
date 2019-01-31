@@ -1,0 +1,5 @@
+<!--weixinmao_house/pages/networkprovince/index.wxml-->
+<view class="companytext">
+  <web-view src="{{siteRoots}}/wxapp/networkprovince/html/{{ids}}"></web-view>
+</view>
+

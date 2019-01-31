@@ -1,0 +1,53 @@
+/* weixinmao_house/pages/componet/select/select.wxss */
+.com-selectBox{
+    width: 520rpx;
+    height: 40rpx;
+}
+.com-sContent{
+    border: 1rpx solid #e2e2e2;
+    background: white;
+    font-size: 32rpx;
+    position: relative;
+    height: 40rpx;
+    line-height: 40rpx;
+}
+.com-sImg{
+    position: absolute;
+    right: 16rpx;
+    top: 20%;
+    width: 38rpx;
+    height: 30rpx;
+    transition: all .3s ease;
+}
+.com-sTxt{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding:0 40rpx 0 12rpx;
+    font-size: 24rpx;
+}
+.com-sList{
+    background: white;
+    width: inherit;
+    position: absolute;
+    border: 2rpx solid #e2e2e2;
+    border-top: none;
+    box-sizing: border-box;
+    z-index: 3;
+    max-height: 240rpx;
+    overflow: auto;
+}
+.com-sItem{
+    height: 60rpx;
+    line-height: 60rpx;
+    border-top: 2rpx solid #e2e2e2;
+    padding: 0 12rpx;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 28rpx;
+}
+.com-sItem:first-child{
+    border-top: none;
+}

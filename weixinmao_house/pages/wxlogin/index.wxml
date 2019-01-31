@@ -1,0 +1,4 @@
+<!--weixinmao_house/pages/wxlogin/index.wxml-->
+<text class='des'>推荐登录方式</text>
+<button class='lgsq'  wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">确认授权登录</button>
+<view wx:else>请升级微信版本</view>

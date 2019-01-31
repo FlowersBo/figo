@@ -1,0 +1,49 @@
+/* weixinmao_house/pages/car/index.wxss */
+/* 车友圈 */
+.news{
+  width: 96%;
+  margin: auto;
+  /* border-top: 2rpx solid #ddd; */
+}
+.newstitle{
+  width: 100%;
+  height: 50rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 36rpx;
+}
+.newstitle .viewmore{
+  font-size: 24rpx;
+  color: #dbdbdb;
+}
+
+.list{
+  width: 100%;
+  margin-top: 20rpx;
+}
+.list-text{
+  font-size: 26rpx;
+  color: #aaa;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.list-img{
+  width: 100%;
+  height: 336rpx;
+  margin-top: 20rpx;
+  position: relative;
+}
+.list-img image{
+  width: 100%;
+  height: 100%;
+  border-radius: 15rpx;
+}
+.list-img .time{
+  font-size: 20rpx;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 16rpx;
+}

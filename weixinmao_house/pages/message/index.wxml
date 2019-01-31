@@ -1,0 +1,26 @@
+<view class="container">
+  <form bindsubmit="bindSave" report-submit="true">
+    <view class="form-box">
+      <view class="row-wrap">
+        <view class="label">我的名字</view>
+        <view class="label-right">
+          <input name="name" class="input" type="text" placeholder="姓名" value="" />
+        </view>
+      </view>
+      <view class="row-wrap">
+        <view class="label">我的号码</view>
+        <view class="label-right">
+          <input name="tel" class="input" maxlength="11" type="number" placeholder="11位手机号码" value="" />
+        </view>
+      </view>
+      <view class="row-wrap">
+        <view class="label">我的需求</view>
+        <view class="label-right">
+          <textarea name="remarks" class="input" placeholder="请输入备注" value="" />
+        </view>
+      </view>
+
+    </view>
+    <button class="save-btn" formType="submit" bindtap='setDisabled' disabled='{{disabled}}'>提交留言</button>
+  </form>
+</view>

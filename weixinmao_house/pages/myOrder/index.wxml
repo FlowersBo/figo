@@ -1,0 +1,105 @@
+<!--weixinmao_house/pages/myOrder/index.wxml-->
+<view class='myOrder'>全部</view>
+<!--导航条-->
+<!-- <view class="navbar">
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+</view> -->
+
+<!--全部-->
+<view class='order' hidden="{{currentTab!==0}}" wx:if="{{orderList.length>=1}}"> <!-- wx:if="{{orderList.length>=1}}" -->
+  <view class='orderDetail' wx:for="{{orderList?orderList:''}}" wx:key="index" wx:for-index="index" wx:for-item="item"   animation="{{slide_up2}}">
+    <view class='currentState' wx:if="{{item.status=='survey'}}">
+      <image src="../../resource/images/typeface/accomplish.png" style='width:100%;height:100%;'/>
+    </view>
+    <view class='orderDetail-wrap'>
+      <view class='midelDetail-wrap'>
+        <view class='brand'>
+          <view class='brand-child'>{{item.brandname}}</view>
+          <view>{{item.modelname}}</view>
+        </view>
+        <!-- <text class='midelDetail' decode="{{true}}">{{item.brandname}}&nbsp;&nbsp;&nbsp;{{item.modelname}}</text> -->
+        <view class='orderDetail-date'>{{item.createtime?item.createtime:''}}</view>
+      </view>
+      <view class='model'>
+        <image class='model-img' src='/weixinmao_house/resource/images/typeface/logo.png'/>
+        <view class='modelContent'>
+          <view class='midelDetail-text' >{{item.pilename?item.pilename:""}}</view>
+          <view class='detail'>
+            <text>室外电缆 等3项辅料及额外施工室外电缆 等3项辅料及额外施工室外电缆 等3项辅料及额外施工室外电缆 等3项辅料及额外施工</text>
+          </view>
+        </view>
+        <!-- <view class='currentState'>
+          {{(item.status=="survey")?"场堪":((item.status=="install")?"安装":"完成")}}          
+        </view> -->
+      </view>
+      <view class='price'>
+          订单金额：<text style='color: #f93939;'> ￥20000</text>元
+      </view>
+      <view class='clickBtn'>
+        <view class='btnwrap'>
+          <button class='btn' hover-class='none' data-id='{{item.id}}' id='{{item.ids}}'  catchtap='removeOrder'>删除订单</button>
+          <button class='btn' hover-class='none' wx:key="index" wx:for-item="item" data-id="{{item.ids}}" bindtap="lineItem">订单详情</button>
+          <button class='btn evaluate' hover-class='none'  wx:key="index" wx:for-item="item" data-id="{{item.ids}}" bindtap='evaluate'>评价</button>
+          <!-- wx:if="{{item.status=='fianl'}}" -->
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='orderDetail' wx:if="{{item.status=='cancel'}}" wx:for="{{orderList?orderList:''}}" wx:key="index" wx:for-index="index" wx:for-item="item" >
+    <view class='currentState'>
+      <image src="../../resource/images/typeface/cancel.png" style='width:100%;height:100%;'/>
+    </view>
+    <view class='orderDetail-wrap'>
+      <view class='midelDetail-wrap'>
+        <view class='brand'>
+          <view class='brand-child'>{{item.brandname}}</view>
+          <view>{{item.modelname}}</view>
+        </view>
+        <view class='orderDetail-date'>{{item.createtime?item.createtime:''}}</view>
+      </view>
+      <view class='model'>
+        <image class='model-img' src='/weixinmao_house/resource/images/typeface/logo.png'/>
+        <view class='modelContent'>
+          <view class='midelDetail-text' >{{item.pilename?item.pilename:""}}</view>
+          <view class='detail'>
+            <text>室外电缆 等3项辅料及额外施工室外电缆 等3项辅料及额外施工室外电缆 等3项辅料及额外施工室外电缆 等3项辅料及额外施工</text>
+          </view>
+        </view>
+      </view>
+      <view class='price'>
+          订单金额：<text style='color: #f93939;'> ￥20000</text>元
+      </view>
+      <view class='clickBtn'>
+        <view class='btnwrap'>
+          <button class='btn' hover-class='none' data-id='{{item.id}}' id='{{item.ids}}'  catchtap='removeOrder'>删除订单</button>
+          <button class='btn' hover-class='none' wx:key="index" wx:for-item="item" data-id="{{item.ids}}" bindtap="lineItem">订单详情</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+ <view wx:else if="{{orderList.length===1}}" style='width:100%;height:89%; position: relative;'  animation="{{slide_up2}}">
+  <image src='/weixinmao_house/resource/images/typeface/timg.jpg' style='width:100%;height:100%;'/>
+  <view style="font-weight: bold; position: absolute; bottom:10rpx; left:50%; transform:translateX(-50%)">暂无订单！！</view>
+</view> 
+<!--待场勘-->
+<!-- <view class='order' hidden="{{currentTab!==1}}">
+  tab_02
+</view> -->
+ 
+<!--待施工-->
+<!-- <view class='order' hidden="{{currentTab!==2}}">
+  tab_03
+</view> -->
+
+<!--已完成-->
+<!-- <view class='order' hidden="{{currentTab!==3}}">
+  tab_04
+</view> -->
+
+<!--已取消-->
+<!-- <view class='order' hidden="{{currentTab!==4}}">
+  tab_05
+</view> -->

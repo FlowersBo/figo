@@ -1,0 +1,5 @@
+<!--weixinmao_house/pages/aboutus/index.wxml-->
+<view class="container">
+  <web-view src="{{siteRoots}}/wxapp/networkinternational/html/{{ids}}"></web-view>
+</view>
+ 
