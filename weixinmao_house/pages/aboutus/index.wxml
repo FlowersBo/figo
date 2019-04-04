@@ -1,4 +1,0 @@
-<!--weixinmao_house/pages/aboutus/index.wxml-->
-<view class="companytext">
-  <web-view src="{{siteRoots}}/wxapp/about/html/{{ids}}"></web-view>
-</view>

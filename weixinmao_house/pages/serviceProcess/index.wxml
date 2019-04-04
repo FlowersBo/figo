@@ -1,3 +1,4 @@
 <!--weixinmao_house/pages/serviceProcess/index.wxml-->
-<text style='font-size:83rpx;  font-weight: bold;'>这是个很大的流程图</text>
-<image  src='/weixinmao_house/resource/images/typeface/time.jpg' style='position: absolute;width:120rpx;height:120rpx;bottom:50%;right:0;'/>
+<image class='img' src='http://figo-online.oss-cn-beijing.aliyuncs.com/service_flow/02.jpg'/>
+<image class='img' src='http://figo-online.oss-cn-beijing.aliyuncs.com/service_flow/03.jpg'/>
+<image class='img' src='http://figo-online.oss-cn-beijing.aliyuncs.com/service_flow/04.jpg'/>

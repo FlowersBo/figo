@@ -1,8 +1,7 @@
 <!--weixinmao_house/pages/car/index.wxml-->
- <view class="news">
+ <!-- <view class="news">
       <view class="newstitle">
         <view>车友圈</view>
-        <!-- <view class="viewmore" >更多>></view>  -->
       </view>
       <block>
         <view class='list'  data-id="{{item.ids}}" bindtap='toSailDetail' wx:for="{{idcLists}}" wx:key="index" wx:for-item="item">
@@ -13,4 +12,7 @@
          </view>
         </view>
       </block>
-    </view>
+    </view> -->
+<view class="container">
+  <web-view src="{{siteRoots}}/wxapp/discount/html/{{ids}}"></web-view>
+</view>

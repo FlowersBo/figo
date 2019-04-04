@@ -153,7 +153,7 @@ Page({
     wx.request({
       'url': siteRoots + '/wxapp/usermessage/add2',
       data: {
-        // _query_userIds: ids,
+        // _query_wxUserIds: ids,
         // _query_name: name,
         // _query_tel: tel,
         // _query_remarks: remarks

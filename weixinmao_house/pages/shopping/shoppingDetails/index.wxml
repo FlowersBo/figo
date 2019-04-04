@@ -1,0 +1,36 @@
+<!--weixinmao_house/pages/shopping/shoppingDetails/index.wxml-->
+<scroll-view scroll-y="true" scroll-top="{{scrollTop}}" style="position: absolute; left: 0; top:0; bottom: 0; right: 0;">
+  <swiper  class="banner"
+     indicator-dots="{{indicatorDots}}"  
+     autoplay="{{autoplay}}" 
+     indicator-active-color="rgba(0,255,0,.3)" 
+     interval="{{interval}}" duration="{{duration}}" 
+     circular="{{duration}}">
+    <block wx:for="{{list}}" wx:key="index">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode="aspectFill" data-src='{{item.ids}}'/>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='contentWrap'>
+    <view class="info-price clear">
+      <view class='price'>￥{{}} </view>
+    </view>
+    <view class="info-title">
+        <text>{{}}</text>
+    </view>
+    <view style="border-top:1px solid #F6F6F6;background: #fff; padding:5px 15px;">
+      <view class="">
+        <text class="sub"><block wx:if='{{goods_info.goods_yunfei==0.00}}'>运费：包邮</block><block wx:else>运费：{{goods_info.goods_yunfei}}</block></text>
+        <text class="sub">库存：{{goods_info.goods_kucun}}</text>
+        <text class="sub">销量：{{goods_info.goods_xiaoliang}}</text>
+      </view>
+      <view class='fenxiang'>
+        <button class='fxbtn' open-type="share">
+          <view style='height:20px;margin-top:8px;'> <icon class="iconfont icon-duigou-copy;" style='font-size:24rpx;margin-right: 5rpx;margin-top:-15rpx;'></icon></view>
+          <view>分享</view>
+        </button>
+      </view>
+    </view>
+  </view>
+</scroll-view>

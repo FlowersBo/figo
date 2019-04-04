@@ -1,5 +1,0 @@
-<!--weixinmao_house/pages/articledetail/index.wxml-->
-<view class="companytext">
-  <web-view src="{{siteRoots}}/wxapp/market/html/{{ids}}"></web-view>
-</view>
-

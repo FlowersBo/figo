@@ -2,20 +2,47 @@
 <view class="container">
   <view class="header">
         <view class="pic">
-          <image src="{{avatarUrl?avatarUrl:'../../resource/images/user_img.png'}}"></image>
-          <view>{{nickName?nickName:''}}</view>
+          <image class='pic-img' src="{{avatarUrl?avatarUrl:'../../resource/images/user_img.png'}}"></image>
+          <view class='pic-name'>{{nickName?nickName:''}}</view>
+          <!-- <view class='pic-city'>
+            <icon class="iconfont icon-weizhi" style='color:#666;font-size:40rpx;'></icon>
+            {{province?province:''}}{{city?city:''}}
+          </view> -->
         </view>
+        
   </view>
-
+ 
   <view class="list">
-        <view class="item" bindtap="userFavorite">我关注的</view>
-        <view class="item" bindtap="calling">
-          <view class="titlename">客服电话</view>
-          <view class="telnumber" >{{customerManagerIphone}}</view>
-        </view>
-        <view class="item" bindtap="toMessage">我要留言</view>
+    <!-- <view class="item" bindtap="userFavorite">
+      <icon class="iconfont icon-follow-r" style='color:#9266f9;font-size:50rpx; margin-right: 10rpx;'></icon>
+      我关注的
+    </view> -->
+    <view class="item" bindtap="calling">
+      <icon class="iconfont icon-dianhua" style='color:#999;font-size:50rpx; margin-right: 10rpx;'></icon>
+      <view class="titlename">客服电话</view>
+    </view>
+    <!-- <view class="item" bindtap="toMessage">
+      <icon class="iconfont icon-liuyan" style='color:#aaa;font-size:50rpx; margin-right: 10rpx;'></icon>
+      我要留言
+    </view> -->
+    <view class="item" bindtap="gotoPhone">
+      <icon class="iconfont icon-mobile" style='color:#999;font-size:50rpx; margin-right: 10rpx;'></icon>
+      <view class='titlename'>我的电话</view>
+      <view class="item-phone" >{{phone?phone:"暂无绑定电话"}}</view>
+    </view> 
+    <!-- <view class="item" bindtap="userAddr">
+      <icon class="iconfont icon-weizhi" style='color:follow;font-size:50rpx; margin-right: 10rpx;'></icon>
+      <!-- 我的位置 {{addr}} -->
+    <!-- </view> -->
+     <button class='service' open-type='contact'>
+       <view>
+          <icon class="iconfont icon-kefu1" style='color:#999;font-size:50rpx;margin-right: 10rpx;'></icon>
+        </view> 
+        <view class='titlename'>售后服务</view>
+      </button>
   </view>
-  <view class="listlgout">
-        <!-- <view class="item" bindtap="logout">退出登录</view>  -->
-  </view>
+  <!-- <view class="listlgout">
+        <view class="item" bindtap="logout">退出登录</view> 
+  </view> -->
+ 
 </view>

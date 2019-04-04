@@ -17,7 +17,9 @@ Page({
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
+            lang: "zh_CN", 
             success: function (res) {
+              
               console.log('显示userinfo信息：');
               console.log(res.userInfo);
               var userInfo = res.userInfo;
@@ -72,5 +74,13 @@ Page({
     })
   },complete: function () {
     
-  }
+  },
+  /**
+ * 页面相关事件处理函数--监听用户下拉动作
+ */
+  onPullDownRefresh: function () {
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 500)
+  },
 })

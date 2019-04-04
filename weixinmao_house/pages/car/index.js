@@ -1,34 +1,27 @@
 // weixinmao_house/pages/car/index.js
+var app = getApp();
+var siteRoots = app.data.siteroot;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    idcLists: [
-      {
-        imgUrl: "../../resource/images/typeface/pic01.jpg",
-        title: "小城清迈的慢生活，一个人的旅行不孤单（自行车）",
-        updatetime: "2018-12-10"
-      },
-      {
-        imgUrl: "../../resource/images/typeface/pic02.jpg",
-        title: "你向往自由，我们就一起走|美西旅拍婚纱之旅",
-        updatetime: "2018-12-9"
-      },
-      {
-        imgUrl: "../../resource/images/typeface/pic03.jpg",
-        title: "野生妹子 9天8夜 包车冬游西藏 且浪且怂 （西安 拉萨 林芝 新疆......",
-        updatetime: "2018-12-8"
-      },
-    ]
+    ids: null,
+   
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options.ids)
+    this.setData(
+      {
+        ids: options.ids,
+        siteRoots: siteRoots
+      }
+    );
   },
 
   /**
@@ -60,10 +53,12 @@ Page({
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+ * 页面相关事件处理函数--监听用户下拉动作
+ */
   onPullDownRefresh: function () {
-
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 500)
   },
 
   /**
@@ -77,6 +72,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: this.data.title + '-' + wx.getStorageSync('companyinfo').name,
+      path: '/weixinmao_house/pages/car/index?id=' + this.data.id
+    }
   }
 })

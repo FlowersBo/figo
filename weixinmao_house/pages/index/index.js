@@ -16,24 +16,7 @@ Page({
     newsIndex:null,
     focusPic: null,
     ids:null,
-    idcList:null,
-    idcLists: [
-      {
-        imgUrl:"../../resource/images/typeface/pic01.jpg",
-        title:"小城清迈的慢生活，一个人的旅行不孤单（自行车）",
-        updatetime:"2018-12-10"
-      },
-      {
-        imgUrl: "../../resource/images/typeface/pic02.jpg",
-        title: "你向往自由，我们就一起走|美西旅拍婚纱之旅",
-        updatetime: "2018-12-9"
-      },
-      {
-        imgUrl: "../../resource/images/typeface/pic03.jpg",
-        title: "野生妹子 9天8夜 包车冬游西藏 且浪且怂 （西安 拉萨 林芝 新疆......",
-        updatetime: "2018-12-8"
-      },
-    ]
+    idcList:[],
   },
  
 
@@ -58,9 +41,9 @@ Page({
 
   },
   // 禁止手动滑动轮播
-  stopTouchMove: function () {
-    return false;
-  },
+  // stopTouchMove: function () {
+  //   return false;
+  // },
 
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数    
@@ -69,13 +52,22 @@ Page({
       siteRoots: siteRoots,
     }); 
     // 轮播图  图片个数参照后台上传为主
-    this.indexFoc();
-    // 市场行情 2条数据
-    // this.indexNews();
-    // idc机房推荐 10条数据 推荐属性
-    this.idcList();
-    this.servicePic();
+      this.indexFoc();
+    // idc车友圈推荐 10条数据 推荐属性
+      this.idcList();
   },
+
+  //跳转售后服务
+  toShopping: function () {
+    wx.navigateTo({
+      url: '/weixinmao_house/pages/shopping/index',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+
+
   // 跳转到idc车友圈详情
   toSailDetail: function (e) {
     var ids = e.currentTarget.dataset.id;
@@ -85,83 +77,85 @@ Page({
       url: "/weixinmao_house/pages/car/index?ids=" + ids,
     })
   },
+  //跳转到车友圈
   toAboutUs: function (e) {
     var that = this;
     wx.navigateTo({
-      // url: "/weixinmao_house/pages/aboutus/index?ids=9c5bf5ba1dcc4beea6fa4275a3f06c45"
-      // wx.request({
-      url: "/weixinmao_house/pages/car/index",
-      // 'url': siteRoots + '/wxapp/market/list2',
-      // data: { pageNumber: 1, pageSize: 10, recomend: true },
-      // success: function (res) {
-      //   console.log("开始");
-      //   console.log(res.data);
-      //   if (res.data) {
-      //     var idcLength = res.data.list.length;
+      url: "/weixinmao_house/pages/carFans/index",
+    })
+  },
 
-      //   }
-      //   console.log("结束");
-    })
-  },
-  // 跳转国际带宽
-  // toWorldIn: function (e) {
-  //   var ids = e.currentTarget.dataset.id;
-  //   wx.navigateTo({
-  //     url: "/weixinmao_house/pages/worldin/index?ids=f79cb7e325144836998d5c1c72b69489"
-  //   })
-  // },
-  toArticleList: function (e) {
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/article/index"
-    })
-  },
-  toCity: function (e) {
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/city/index"
-    })
-  },
   //跳转到我的订单
   toHotSale: function (e) {
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/myOrder/index"
-    })
+    // 验证用户是否登陆
+      var that = this;
+      console.log('11111111');
+      console.log(app.data);
+      if (app.data.userinfo == null) {
+        wx.showToast({
+          title: "为了您更好的体验,请先点击我的下方登录同意授权",
+          icon: 'none',
+          duration: 2000
+        })
+        wx.navigateTo({
+          url: '/weixinmao_house/pages/wxlogin/index',
+        })
+    } else if (app.data.userinfo.data.mobile !== '' &&app.data.userinfo.data.mobile !== null) {//验证用户是否短信验证
+        wx.navigateTo({
+          url: "/weixinmao_house/pages/myOrder/index"
+        })
+    
+    }
+      else if (app.data.userphone != '' && app.data.userphone != null) {//验证用户是否短信验证
+        wx.navigateTo({
+          url: "/weixinmao_house/pages/myOrder/index"
+        })
+      }
+    else {
+        wx.showToast({
+          title: "请绑定您的手机号",
+          icon: 'none',
+          duration: 2000
+        })
+        wx.navigateTo({
+          url: '/weixinmao_house/pages/phoneVerify/index',
+           // wx.navigateBack();
+        })
+    }   
   },
+
+  //跳转到我要立桩
   toSaleList: function (e) {
+    // 验证用户是否登陆
+    var that = this;
+    console.log(app.data);
+    if (app.data.userinfo == null) {
+      wx.showToast({
+        title: "为了您更好的体验,请先点击我的下方登录同意授权",
+        icon: 'none',
+        duration: 2000
+      })
+      wx.navigateTo({
+        url: '/weixinmao_house/pages/wxlogin/index',
+      })
+    }
+    else {
+      console.log('我的，获取全局登录信息', app.data);
+      wx.navigateBack();
+    }
     wx.navigateTo({
       url: "/weixinmao_house/pages/information/index"
     })
   },
  
-  toArticle: function (e) {
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/salelist/index"
-    })
-  },
+  //跳转到流程
   serviceProcess: function(e){
     wx.navigateTo({
-      url: "/weixinmao_house/pages/serviceProcess/index"
+      url: "/weixinmao_house/pages/service/index"
     })
   },
-  // toArticleDetail: function (e) {
-  //   var ids = e.currentTarget.dataset.id;
-  //   wx.navigateTo({
-  //     url: "/weixinmao_house/pages/articledetail/index?ids=" + ids
-  //   })
-  // },
-  toActive:function(e)
-  {
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/active/index"
-    })
 
-  }
-  ,
-  toNetWorkProvince: function (e) {
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/networkprovince/index?ids=ef634359be8540d6898a2782df8372b2"
-    })
-  },
-  // 首轮播跳转
+  // 首页轮播跳转
   toNewsDetail:function(e){
     var ids = e.currentTarget.dataset.id;
     console.log("000000");
@@ -172,161 +166,16 @@ Page({
       url: "/weixinmao_house/pages/newsdetail/index?ids=" + ids
     })
   },
-
-  toOldHouseDetail: function (e) {
-    var id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/oldhousedetail/index?id=" + id
-    })
-  },
-  toLethouse: function (e) {
-    var id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/lethouselist/index?id=" + id
-    })
-
-  },
-  toMessage: function(e)
-    {
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/message/index"
-    })
-
-    },
-    
-  toSearch:function(e){
-
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/search/index"
-    })
-
-
-  },
-  PubOldhouse:function(e){
-    var that = this;
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/pub/index",
-      success:function(){
-        that.data.showmsg = true;
-        that.setData({
-          showmsg: that.data.showmsg
-
-        })
-
-      }
-    })
-  },
-  PubLethouse: function (e) {
-    var that = this;
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/letpub/index",
-      success: function () {
-        that.data.showmsg = true;
-        that.setData({
-          showmsg: that.data.showmsg
-
-        })
-
-      }
-    })
-  },
-
-  toSaleOldPub: function (e) {
-    var that = this;
-
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/saleoldpub/index",
-      success: function () {
-        that.data.showmsg = true;
-        that.setData({
-          showmsg: that.data.showmsg 
-
-        })
-
-      }
-    })
-  },
-
-
-  toSalePub:function(e){
-    var that = this;
-
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/salepub/index",
-      success: function () {
-        that.data.showmsg = true;
-        that.setData({
-          showmsg: that.data.showmsg
-
-        })
-
-      }
-    })
-  },
-
-  toSaleBuyPub: function (e) {
-    var that = this;
-
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/salebuypub/index",
-      success: function () {
-        that.data.showmsg = true;
-        that.setData({
-          showmsg: that.data.showmsg
-
-        })
-
-      }
-    })
-  },
-
-  toSaleLetPub: function (e) {
-    var that = this;
-
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/saleletpub/index",
-      success: function () {
-        that.data.showmsg = true;
-        that.setData({
-          showmsg: that.data.showmsg
-
-        })
-
-      }
-    })
-  },
- 
-  goPub:function(e){
-    this.data.showmsg = false;
-    this.setData({
-      showmsg: this.data.showmsg
-
-    })
-  
-/*
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/pub/index"
-    })
-
-  */
-
-  },
-  closemsg:function(e) {
-    this.data.showmsg = true;
-    this.setData({
-      showmsg: this.data.showmsg
-
-    })},
-  goMap: function (e) {
-    wx.openLocation({
-      latitude: parseFloat(wx.getStorageSync('companyinfo').lat),
-      longitude: parseFloat(wx.getStorageSync('companyinfo').lng),
-      scale: 18,
-      name: wx.getStorageSync('companyinfo').name,
-      address: wx.getStorageSync('companyinfo').address
-    })
-  },
-  // 首页一轮播图
+  // goMap: function (e) {
+  //   wx.openLocation({
+  //     latitude: parseFloat(wx.getStorageSync('companyinfo').lat),
+  //     longitude: parseFloat(wx.getStorageSync('companyinfo').lng),
+  //     scale: 18,
+  //     name: wx.getStorageSync('companyinfo').name,
+  //     address: wx.getStorageSync('companyinfo').address
+  //   })
+  // },
+  // 首页轮播图
   indexFoc:function(e){
     var that = this;
     wx.request({
@@ -337,7 +186,7 @@ Page({
             focusPic: res.data.list,
             // pic: res.data.list.pic,
           })
-          console.log(res.data.list);
+          console.log('轮播图',res.data.list);
           // console.log(res.data.list[0].ids);   
         }
       },
@@ -350,30 +199,7 @@ Page({
       }
     });
   },
-  // 服务留下播图
-  servicePic: function (e) {
-    var that = this;
-    wx.request({
-      'url': siteRoots + '/wxapp/discount/list2',
-      success: function (res) {
-        if (res.data) {
-          that.setData({
-            servicePic: res.data.list,
-            // pic: res.data.list.pic,
-          })
-          console.log('服务流程图2',res.data.list);
-          // console.log(res.data.list[0].ids);   
-        }
-      },
-      fail: function (res) {
-        console.log('网络错误');
-        that.setData({
-          showmsg: '网络错误'
-
-        })
-      }
-    });
-  },
+ 
 
   //点击放大
   // previewImg: function (e) {
@@ -405,17 +231,18 @@ Page({
   //     }
   //   });
   // },
-  // idc机房推荐 10条数据 推荐属性
+  // 车友圈精选 3条数据 推荐属性
   idcList:function(e){
     var that = this;
     wx.request({
-      'url': siteRoots + '/wxapp/market/list2',
-      data: { pageNumber: 1, pageSize: 10, recomend: true },
+      'url': siteRoots + '/wxapp/discount/list2',
+      data: { pageNumber: 1, pageSize: 3, recomend: true, _query_type: "friendcircle", 'orderColunm': 'updateTime', 'orderMode': 'desc'},
       success: function (res) {
-        console.log("开始");
+        console.log("车友圈开始");
         console.log(res.data);
         if (res.data) {
           var idcLength = res.data.list.length;
+          console.log(res.data.list)
           that.setData(
             {
               idcList: res.data.list,
@@ -445,9 +272,8 @@ Page({
   onShow: function () {
     // 轮播图  图片个数参照后台上传为主
     this.indexFoc();
-    // 市场行情 2条数据
     // this.indexNews();
-    // idc机房推荐 10条数据 推荐属性
+    // idc车友圈推荐 10条数据 推荐属性
     this.idcList();
     
   },
@@ -475,6 +301,4 @@ Page({
       path: '/weixinmao_house/pages/index/index'
     }
   }
-
-  
 })

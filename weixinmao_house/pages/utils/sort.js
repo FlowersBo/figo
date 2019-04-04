@@ -8,5 +8,5 @@ function toDate(number) {
   return (Y + M + D)
 }
 module.exports = {
-  toData: toData
+  toDate: toDate
 }  

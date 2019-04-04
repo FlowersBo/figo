@@ -3,25 +3,33 @@ var R_htmlToWxml = require('../../resource/js/htmlToWxml.js'); //引入公共方
 var imageUtil = require('../../resource/js/images.js');
 var app = getApp();
 var siteRoots = app.data.siteroot;
-
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    phone:null,
     showmsg: true,
     nickName:null,
-    avatarUrl:null,
+    province: null,
+    city:null,
+    customerManagerIphone: '13512345678',
     userinfo:{},
     avatarUrlDefault:'../../resource/images/user_img.png',
-    customerManagerIphone:''
+    addr: '选择位置'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
+    // var phone = app.data.userinfo.mobile;
+    // console.log(phone)
+    // var that = this;
+    // that.setData({
+    //   phone: phone
+    // })
+    console.log(app.data.addr)
     wx.setNavigationBarTitle({
       title: '我的',
     })
@@ -30,13 +38,13 @@ Page({
   },
 // 用户信息展示
   userInfoShow: function (e) { 
-    var that = this;
+    var that = this; 
     console.log('00000000000000');
     console.log(app.data);
     if (app.data.userinfo == null){
       wx.showToast({
         title: "为了您更好的体验,请先点击我的下方登录同意授权",
-        icon: 'none',
+        icon: 'none',   
         duration: 2000
       })
       wx.navigateTo({
@@ -46,10 +54,23 @@ Page({
     else{
       console.log('我的，获取全局登录信息', app.data);
       console.log('我的，获取全局登录信息', app.data.userinfo);
-      console.log('我的，获取全局登录信息', app.data.userinfo.avatar);
+      console.log('我的，获取全局登录信息', app.data.userinfo.data.avatar);
+      console.log('全局的手机号', app.data.userphone)
+      if (app.data.userphone) {
+        that.setData({
+          phone: app.data.userphone
+        })
+      } 
+      else if (app.data.userinfo.data.mobile){
+        that.setData({
+          phone: app.data.userinfo.data.mobile,
+        })
+      }
       that.setData({
-        avatarUrl: app.data.userinfo.avatar,
-        nickName: app.data.userinfo.nickname
+        avatarUrl: app.data.userinfo.data.avatar,
+        nickName: app.data.userinfo.data.nickname,
+        province: app.data.userinfo.data.province,
+        city: app.data.userinfo.data.city,
       });
     }
   },
@@ -59,28 +80,50 @@ Page({
    */
   onReady: function() {
   },
-  toMessage: function(e) {
-    wx.navigateTo({
-      url: "/weixinmao_house/pages/message/index"
-    })
+
+  // 我的关注
+  // userFavorite: function () {
+  //   wx.navigateTo({
+  //     url: '/weixinmao_house/pages/userfavorite/index',
+  //   })
+  // },
+  //跳转到留言
+  // toMessage: function(e) {
+  //   wx.navigateTo({
+  //     url: "/weixinmao_house/pages/message/index"
+  //   })
+  // },
+  //跳转手机验证
+  gotoPhone: function () {
+    var that=this
+    if (that.data.phone != '' && that.data.phone != null) {
+      wx.showToast({
+        title: "您已绑定手机号",
+        icon: 'none',
+        duration: 2000
+      })
+    } else if (app.data.userphone != '' && app.data.userphone != null){
+      wx.showToast({
+        title: "您已绑定手机号",
+        icon: 'none',
+        duration: 2000
+      })
+      }else{
+      wx.navigateTo({
+        url: "/weixinmao_house/pages/phoneVerify/index",
+      })
+    }
   },
 
-// 客户经理信息
-// customerManager: function (e) {
-//   var that = this;
-//   wx.request({
-//     url: siteRoots+'/wxapp/customermanager/list2',
-//     success: function (res) {
-//       that.setData({
-//         customerManagerIphone: res.data.list[0].phone,
-//       })
-//       console.log(res.data.list[0].phone);
-//       var customerManagerIphone = res.data.list[0].phone
-//     },
-//     fail: function (res) {
-//     }
-//   })
-// },
+
+//获取位置
+  userAddr:function(){
+    var that = this;
+    console.log(that)
+    app.getPermission(that);    //传入that值可以在app.js页面直接设置内容    
+    console.log('当前位置',that.data.addr)
+  },
+  
 // 拨打电话
 calling: function () {
   wx.makePhoneCall({
@@ -94,21 +137,12 @@ calling: function () {
   })
 },
 
-// 我的关注
-userFavorite: function () {
-  wx.navigateTo({
-    url: '/weixinmao_house/pages/userfavorite/index',
-  })
-},
-
-
-// 检查用户登录
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
     this.userInfoShow();
+   
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -125,10 +159,12 @@ userFavorite: function () {
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-    wx.stopPullDownRefresh();
+  * 页面相关事件处理函数--监听用户下拉动作
+  */
+  onPullDownRefresh: function () {
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 500)
   },
   /**
    * 页面上拉触底事件的处理函数

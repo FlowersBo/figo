@@ -2,26 +2,31 @@
 <view class='carInfo' >
   <view class='carInfo-content'>
     <text class='carInfo-title'>车辆信息</text>
-    <view class='infoWrap'>
-      <text class='info'>车辆品牌：</text>
-      <select prop-array='{{selectArray}}' bind:myget='getbrand'></select> 
+    <view class='ownersInfoWrap' style='margin-top:40rpx;'>
+      <text>车辆品牌：</text>
+      <input class="userPhone" value="{{buyer_brand}}" style='border-bottom:4rpx solid #E2E2E2;' placeholder-class="placeholderStyle" bindblur="buyer_brand"/>
+    </view>
+    <view class='ownersInfoWrap'  style='margin-top:40rpx;'>
+      <text>车辆型号：</text>
+      <input class="userPhone" value="{{buyer_model}}" style='border-bottom:4rpx solid #E2E2E2;' placeholder-class="placeholderStyle" bindblur="buyer_model"/>
     </view>
     <view class='infoWrap'>
-      <text class='info'>型号：</text>
-      <select prop-array='{{selectArray1}}'  bind:myget='getmodel'></select> 
-    </view>  
-    <view class='infoWrap'>
-      <text class='info'>购车时间：</text>
-      <picker mode="date" class='date' value="{{date}}" start="2001-09-01" end="2020-09-01" bindchange="bindDateChange">
+      <text class='info' >购车时间：</text>
+      <picker mode="date" class='date' value="{{date}}" start="1981-09-01" end="2020-09-01" bindchange="bindDateChange">
         <text class="picker" decode="{{true}}">&nbsp;&nbsp;{{date}}</text>
-        <image src='/weixinmao_house/resource/images/typeface/bottom.jpg' class='com-sImg'  animation="{{animationData}}"/>
+        <image src='/weixinmao_house/resource/images/typeface/bottom.jpg' class='com-sImg'/>
       </picker>
-      <!-- <select prop-array='{{selectArray2}}'   bind:myget='getDate'></select>  -->
     </view>  
-    <view class='infoWrap'>
+    <view class='select_box select_box'>
       <text class='info'>是否新车：</text>
-      <select prop-array='{{selectArray3}}'  bind:myget='getoldnew'></select> 
-    </view>     
+      <view class='select'  catchtap='selectTap'>
+        <text class='select_text'>{{selectData[index]?selectData[index]:dates}}</text>
+        <image class='select_img {{show&&"select_img_rotate"}}' src='../../resource/images/typeface/bottom.jpg'></image>
+      </view>
+      <view class='option_box' style='height:{{show?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
+        <text class='option' wx:for-item="item" data-name='{{item}}' style='{{index==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+      </view>
+    </view>
   </view>
 </view>
 <view class='ownersInfo'> 
@@ -50,7 +55,8 @@
 
     <view class='ownersInfoWrap'>
       <text>详细地址:</text>
-      <textarea class='address' value="{{detail_address}}"  bindblur="bindDetailAddress"></textarea >  
+      <!-- <textarea class='address' value="{{detail_address}}"  bindblur="bindDetailAddress"></textarea >   -->
+      <textarea class="address" value="{{detail_address}}" bindinput="bindDetailAddress" />
     </view>
   </view>
 </view>
@@ -59,27 +65,7 @@
 </view> -->
 <view class='btnWrap'>
   <view class='btn'>
-  <button hover-class='none' class='btn-reset'  bindtap="bindCancelButton">重置</button>
-  <button hover-class='none' class='btn-submit' bindtap="bindSaveButton">提交</button>
+    <button wx:if="{{isShow}}" hover-class='none' class='btn-reset'  bindtap="bindCancelButton">重置</button>
+    <button hover-class='none' class='btn-submit' bindtap="bindSaveButton">{{isShow?'提交':'修改'}}</button>
+  </view>
 </view>
-</view>
-<view>{{figoToken}}</view>
- <!--弹出省市区三级联动-->
-    <!-- <view wx:if="{{showPickerView}}" catchtouchmove="noTouch" class="picker-view-container">
-        <view class="picker-view-title">
-           <text style="margin-left:10rpx" bindtap="closePickerView">取消</text>
-           <text>选择地址</text>
-           <text style="margin-right:10rpx" bindtap="confirmPickerView">确定</text>
-        </view>
-        <picker-view class="area-picker-view"  indicator-class="area-indicator-class" value="{{value}}" bindchange="bindChange">
-            <picker-view-column>
-                <view wx:for="{{provArr}}" wx:key="id" class="picker-view-column" >{{item.name}}</view>
-            </picker-view-column>
-            <picker-view-column>
-                <view wx:for="{{cityArr}}" wx:key="id" class="picker-view-column" >{{item.name}}</view>
-            </picker-view-column>
-            <picker-view-column>
-                <view wx:for="{{areaArr}}" wx:key="id" class="picker-view-column" >{{item.name}}</view>
-            </picker-view-column>
-        </picker-view>
-    </view> -->

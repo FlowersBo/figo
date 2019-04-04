@@ -1,0 +1,27 @@
+.example {
+  display: block;
+  width: 100%;
+  height: 70rpx;
+  background-color: #f2f2f2;
+  line-height: 70rpx;
+}
+
+.marquee_box {
+  width: 100%;
+  position: relative;
+}
+
+.marquee_text {
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.gg {
+  background-color: #f2f2f2;
+  position: absolute;
+  z-index: 1;
+  font-size: 30rpx;
+}

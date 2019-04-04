@@ -7,28 +7,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hotSailList:null,
+    hotSailList: null,
+    hasNextPage: null,
+    pageNumber: 1,
+    idcLists: []
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var that = this
+  idcList: function (e) {
+    var that = this;
     wx.request({
-      'url': siteRoots+'/wxapp/discount/list2',
+      'url': siteRoots + '/wxapp/discount/list2',
+      data: { pageNumber: 1, pageSize: 10, recomend: true, _query_type: 'news', 'orderColunm': 'updateTime', 'orderMode': 'desc'},
       success: function (res) {
-        console.log("开始加载数据");
-        console.log(res.data.list);
+        console.log("车友圈开始");
+        console.log(res.data);
         if (res.data) {
+          var idcLength = res.data.list.length;
+          console.log(res.data.list)
           that.setData(
             {
-              hotSailList: res.data.list,
-              siteRoots: siteRoots
+              idcList: res.data.list,
+              domIidcLength: idcLength
             }
           )
         }
-        console.log("结束加载数据");
+        console.log("结束");
       },
       complete: function () {
         wx.hideNavigationBarLoading(); //完成停止加载
@@ -36,15 +38,15 @@ Page({
       }
     });
   },
-  goHotDdetail: function (e) {
+  // 跳转到idc车友圈详情
+  toSailDetail: function (e) {
     var ids = e.currentTarget.dataset.id;
-    console.log("000000");
-    console.log(ids);
+    console.log(e.currentTarget)
+    console.log(ids)
     wx.navigateTo({
-      url: "/weixinmao_house/pages/hotdetail/index?ids=" + ids
+      url: "/weixinmao_house/pages/car/index?ids=" + ids,
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -56,7 +58,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
+    this.idcList();
   },
 
   /**
@@ -74,10 +77,12 @@ Page({
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+  * 页面相关事件处理函数--监听用户下拉动作
+  */
   onPullDownRefresh: function () {
-    wx.stopPullDownRefresh();
+    setTimeout(function () {
+      wx.stopPullDownRefresh()
+    }, 500)
   },
 
   /**

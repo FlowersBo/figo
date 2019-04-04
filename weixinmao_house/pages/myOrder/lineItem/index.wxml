@@ -1,56 +1,82 @@
 <!--weixinmao_house/pages/myOrder/lineItem/index.wxml-->
-<view class='lineItem' >
+<view class='lineItem'>
   <view class='installState'>
     <view class='installState-text'>
-      <image src="../../../resource/images/typeface/accomplish1.png" style='width:100%;height:100%;'/>
+      <!-- <image src="../../../resource/images/typeface/accomplish1.png" style='width:100%;height:100%;'/> -->
+      <text style='color:red;font-weight: bold;font-size:30rpx;'>{{lineItemStatusname?lineItemStatusname:''}}</text>
     </view>
     <image class='installState-img' src='../../../resource/images/typeface/charge.png'></image>
   </view>
   <view class='orderFrom'>
     <view class='wrap'>
-      <view class='orderStatus'>
+      <!-- 订单状态 -->
+      <view class='orderStatus' animation="{{slide_up2}}">
         <view class='orderStatus-content'>
           <view class='content-order'>订单状态</view>
           <view class='content-phone'>咨询电话：{{consultPhone}}</view>
         </view>
-        <view class='content-details'>{{orderStatus}}</view>
+        <view class='content-details'>{{lineorderStatusInfo}}</view>
       </view>
-    <!-- 员工信息 -->
-      <view class='staffInfo'>
-        <view class='materials-header'>场堪员资料</view>
+      <!-- 施工人员 -->
+      <view class='staffInfo' wx:if="{{lineItemStatus=='buildprepare'}}" animation="{{slide_up3}}">
+        <view class='materials-header'>施工监理资料</view>
         <view class='staffInfoWrap'>
-          <image class='staffInfoWrap-img' src='../../../resource/images/typeface/user.png'/>
+          <image wx:if="{{lineItemList.surveyDesignUserImg}}" class='staffInfoWrap-img' src="{{siteRoots}}{{lineItemList.surveyDesignUserImg}}" />
+          <image wx:else class='staffInfoWrap-img' src="../../../resource/images/typeface/header.jpg" />
           <view class='information'>
-            <text class='informationName'>姓名：{{informationName}}</text>
-            <text class='informationPhonwe'>电话：{{informationPhonwe}}</text>
-            <text class='informationNumber'>工号：{{informationNumber}}</text>
-            <text class='informationTime'>总场堪数{{informationTime}}</text>
+            <text class='informationName'>姓名：{{lineItemStatbuildUser.names}}</text>
+            <text class='informationPhonwe'>电话：{{lineItemStatbuildUser.mobile}}</text>
+            <text class='informationNumber'>工号：{{lineItemStatbuildUser.username}}</text>
+            <!-- <text class='informationTime'>总场堪数{{informationTime}}</text> -->
             <view class='informationTimeStar'>
               <text>服务星级：</text>
-               <view  wx:for="{{scs}}" class='star-{{item}}' wx:key="index"></view>
+              <view wx:for="{{scs4}}" class='star-{{item}}' wx:key="index"></view>
             </view>
           </view>
         </view>
       </view>
-    <!-- 评价 -->
-      <view class='bigWrap' animation="{{slide_up2}}">
-        <view class='materials-header'>您的评价</view>
-        <view class='evaluates'>
-          <view class='itemWrap'>
-            <view class='evaluateWrap'>
-              <view class='straWrap'>
-                <text style='font-size:30rpx; font-weight:600; white-space:nowrap '>安装进度</text>
-                <view class='star'>
-                  <block wx:for="{{stars}}" wx:key="index">
-                    <image class="star-image" style="left: {{item*90}}rpx" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
-                      <view class="item" style="left:0rpx" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
-                      <view class="item" style="left:30rpx" data-key="{{item+1}}" bindtap="selectRight"></view>
-                    </image>
-                  </block>
+
+      <!-- 场勘人员 -->      
+      <view class='staffInfo' wx:if="{{lineItemStatus=='surveyprepare'}}" animation="{{slide_up3}}">
+        <view class='materials-header'>场勘员资料</view>
+        <view class='staffInfoWrap'>
+          <image wx:if="{{lineItemList.buildWorkerImg}}" class='staffInfoWrap-img' src="{{siteRoots}}{{lineItemList.buildWorkerImg}}" />
+          <image wx:else class='staffInfoWrap-img' src="../../../resource/images/typeface/header.jpg" />
+          <view class='information'>
+            <text class='informationName'>姓名：{{lineItemStatdesignUser.names}}</text>
+            <text class='informationPhonwe'>电话：{{lineItemStatdesignUser.mobile}}</text>
+            <text class='informationNumber'>工号：{{lineItemStatdesignUser.username}}</text>
+            <!-- <text class='informationTime'>总场堪数{{informationTime}}</text> -->
+            <view class='informationTimeStar'>
+              <text>服务星级：</text>
+              <view wx:for="{{scs6}}" class='star-{{item}}' wx:key="index"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+
+      <!-- 评价 -->
+      <!-- || lineItemStatus=='buildconfirm' || lineItemStatus=='fileupload' -->
+      <view class="bigWrap {{showView?'show':'hide'}}" wx:if="{{lineItemStatus=='buildfinish'}}" animation="{{slide_up3}}">
+        <form bindsubmit="formSubmit">
+          <view class='materials-header'>您的评价</view>
+          <view class='evaluates'>
+            <view class='itemWrap'>
+              <view class='evaluateWrap'>
+                <view class='straWrap'>
+                  <text style='font-size:30rpx; font-weight:600; white-space:nowrap '>安装速度</text>
+                  <view class='star'>
+                    <block wx:for="{{stars}}" wx:key="index">
+                      <image class="star-image" style="left: {{item*90}}rpx" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
+                        <view class="item" style="left:0rpx" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
+                        <view class="item" style="left:30rpx" data-key="{{item+1}}" bindtap="selectRight"></view>
+                      </image>
+                    </block>
+                  </view>
                 </view>
-              </view>
-              <view class='straWrap'>
-                <text style='font-size:30rpx; font-weight:600; white-space:nowrap '>服务进度</text>
+                <view class='straWrap'>
+                  <text style='font-size:30rpx; font-weight:600; white-space:nowrap'>服务态度</text>
                   <view class='star'>
                     <block wx:for="{{stars}}" wx:key="index">
                       <image class="star-image" style="left: {{item*90}}rpx" src="{{key1 > item ?(key1-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
@@ -59,9 +85,9 @@
                       </image>
                     </block>
                   </view>
-              </view>
-              <view class='straWrap'>
-                <text style='font-size:30rpx; font-weight:600; white-space:nowrap '>施工质量</text>
+                </view>
+                <view class='straWrap'>
+                  <text style='font-size:30rpx; font-weight:600; white-space:nowrap'>施工质量</text>
                   <view class='star'>
                     <block wx:for="{{stars}}" wx:key="index">
                       <image class="star-image" style="left: {{item*90}}rpx" src="{{key2 > item ?(key2-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
@@ -70,9 +96,9 @@
                       </image>
                     </block>
                   </view>
-              </view>
-              <view class='straWrap'>
-                <text style='font-size:30rpx; font-weight:600; white-space:nowrap '>收费合理</text>
+                </view>
+                <view class='straWrap'>
+                  <text style='font-size:30rpx; font-weight:600; white-space:nowrap '>收费合理</text>
                   <view class='star'>
                     <block wx:for="{{stars}}" wx:key="index">
                       <image class="star-image" style="left: {{item*90}}rpx" src="{{key3 > item ?(key3-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
@@ -81,88 +107,144 @@
                       </image>
                     </block>
                   </view>
+                </view>
               </view>
-            </view>
-            <view class="conts">
-              <textarea class="areas" placeholder='留下点评，帮助更多人' minlength="{{min}}" maxlength="{{max}}" bindinput="inputs"> 
-                <text class="currentWordNumber">{{currentWordNumber|0}}/{{max}}</text>
-                <text class="hint">{{texts}}</text>
-              </textarea>
+              <!-- 显示评论后内容 -->
+              <view class="picture {{isShow?'hideTrue':'true'}}">
+                <view class='materials-header'>图片</view>
+                <view class='picture-img'>
+                  <view class='img-wrap' wx:for="{{surveyFileList}}" wx:key="index">
+                    <image src='{{item.url}}' data-src="{{item}}" mode="aspectFill" bindtap='previewImg' />
+                  </view>
+                </view>
+              </view>
+              <view class="conts">
+                <textarea class="areas" placeholder="{{icon}}" minlength="{{min}}" maxlength="{{max}}" bindinput="inputs">
+                  <text class="currentWordNumber">{{currentWordNumber|0}}/{{max}}</text>
+                  <text class="hint">{{text}}</text>
+                </textarea>
+              </view>
             </view>
           </view>
-        </view>
-        <view class="weui-cell"> 
-            <view class="weui-cell__bd"> 
-            <view class="weui-uploader"> 
-              <view class="weui-uploader__hd"> 
-              <view class="weui-uploader__title">晒图：</view> 
-              <view class="weui-uploader__info">{{imageList.length}}/{{count}}</view> 
-              </view> 
-              <view class="weui-uploader__bd"> 
-              <view class="weui-uploader__files"> 
-                <block wx:for="{{imageList}}" wx:for-item="image" wx:key="index"> 
-                <view class="weui-uploader__file"> 
-                  <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image> 
-                </view> 
-                </block>
-              </view> 
-              <view class="weui-uploader__input-box"> 
-                <view class="weui-uploader__input" bindtap="chooseImage"></view> 
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <view class="weui-uploader">
+                <view class="weui-uploader__hd">
+                  <view class="weui-uploader__title">点击可预览选好的图片</view>
+                  <view class="weui-uploader__info">{{uploadPics.length}}/4</view>
+                </view>
+                <view class="weui-uploader__bd">
+                  <view class="weui-uploader__files">
+                    <block wx:for="{{uploadPics}}" wx:for-item="item" wx:key="{{index}}">
+                      <view class="weui-uploader__file">
+                        <image class="weui-uploader__img" src="{{item.url}}"  mode="aspectFill" bindtap="previewImage"></image>
+                        <view class="image-remover" data-key="{{item.key}}" data-index='{{index}}' bindtap="removeImage">删除</view>
+                      </view>
+                    </block>  
+                  </view>
+                  <!-- isShow 这个是判断是否进行触发点隐藏操作-->
+                  <view class="weui-uploader__input-box {{isShow?'true':'hideTrue'}}">
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                  </view>
+                </view>
               </view>
-              </view> 
-            </view> 
-          </view> 
-        </view> 
+            </view>
+          </view>
+          <button class='evaluates-btn' formType="submit">提交</button>
+        </form>
       </view>
-    <!--个人信息  -->
-      <view class='userInfo' animation="{{slide_up3}}">
-        <view class='materials-header'>个人信息</view>
-        <view class='userInfoWrap'>
-          <view class='userName' >
-          <text decode="{{true}}">车主：{{lineItemList.customname?lineItemList.customname:""}}&nbsp;&nbsp;{{lineItemList.custommobile?lineItemList.custommobile:""}}</text>
-        </view>
-        <view class='userSite'>
-          <view style='white-space:nowrap;' >地址：</view>
-          <text class='userSite-text'>{{lineItemList.customaddr?lineItemList.customaddr:""}}</text>
-        </view>
-        </view>
+
+
+
+
+      <!-- 您的评价 -->
+      <view class='bigWrap'  wx:if="{{lineItemStatus=='buildconfirm'}}" style='padding:15rpx 0 0 0;'  animation="{{slide_up3}}">
+          <view class='materials-header'>您的评价</view>
+          <view class='evaluates'>
+            <view class='itemWrap'>
+              <view class='evaluateWrap'>
+                <view class='evaluate'>
+                  安装速度：
+                  <view wx:for="{{scs1}}" class='star-{{item}}' wx:key="index"></view>
+                </view>
+                <view class='evaluate'>
+                  服务态度：
+                  <view wx:for="{{scs2}}" class='star-{{item}}' wx:key="index"></view>
+                </view>
+                <view class='evaluate'>
+                  施工质量：
+                  <view wx:for="{{scs3}}" class='star-{{item}}' wx:key="index"></view>
+                </view>
+                <view class='evaluate'>
+                  收费合理：
+                  <view wx:for="{{scs4}}" class='star-{{item}}' wx:key="index"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view>
+            <view  class='pictures'>
+              <view class='pictures-img'>
+                <view class='img-wraps' wx:for="{{surveyFileList}}" wx:key="index">
+                  <image src='{{item.url}}' data-src="{{item}}" mode="aspectFill" bindtap='previewImg' />
+                </view>
+              </view>
+            </view>
+            <view class='evaluates-text'>感觉使出了洪荒之力，我很满意！！！</view>
+          </view>
+          <!-- isShow 这个是判断是否进行触发点隐藏操作-->
+          <view class="one {{addTo?'isshow':'ishidden'}}">
+            <button class='evaluates-btn' bindtap='toEvaluate'>追加评价</button>
+          </view>
+          <!-- 追评展示 -->
+          <view class='pictures-wrap'>
+            <text style='font-size:28rpx;margin-left:26rpx;font-weight: bold;'>安装后追评</text>
+            <view  class='pictures'>
+              <view class='pictures-img'>
+                <view class='img-wraps' wx:for="{{surveyFileList}}" wx:key="index">
+                  <image src='{{item.url}}' data-src="{{item}}" mode="aspectFill" bindtap='previewImg' />
+                </view>
+              </view>
+            </view>
+            <view class='evaluates-text'>服务态度很满意，安装速度很快！！！</view>
+          </view>
       </view>
-      <!--车辆信息  -->
-      <view class='userInfo' animation="{{slide_up3}}">
-        <view class='materials-header'>车辆信息</view>
-        <view class='userInfoWrap'>
-          <view class='userName' >
-          <text decode="{{true}}">车辆型号：{{lineItemList.customname?lineItemList.customname:""}}&nbsp;&nbsp;{{lineItemList.custommobile?lineItemList.custommobile:""}}</text>
-        </view>
-        <view class='userSite'>
-          <view style='white-space:nowrap;' >充电桩型号：</view>
-          <text class='userSite-text'>{{lineItemList.customaddr?lineItemList.customaddr:""}}</text>
-        </view>
-        </view>
-      </view>
+
+
+
+
+
+
+
+
+
+
+
+
+
       <!--材料清单  -->
-      <view class='materials'  animation="{{slide_up4}}">
-        <view class='materials-header'>材料清单(3)件</view>
+      <view class='materials' wx:if="{{lineItemStatus=='buildfinish' || lineItemStatus=='surveyfinish' || lineItemStatus=='buildconfirm'}}" animation="{{slide_up4}}">
+        <view class='materials-header'>材料清单{{orderMaterialsList.length}}件</view>
         <!-- <view class='materials-table'></view> -->
         <view class='table'>
           <view class='tr bg-header'>
-            <view class='th'>序号</view>
             <view class='th'>名称</view>
             <view class='th'>数量</view>
+            <view class='th'>单价</view>
             <view class='th'>小计</view>
           </view>
-          <view wx:for="{{lisData}}" wx:key="{{code}}">
+          <view wx:for="{{orderMaterialsList?orderMaterialsList:''}}" wx:key="{{code}}">
             <view class='tr bg-items' wx:if="{{index%2==0}}">
-              <view class='td'>{{item.index}}</view>
-              <view class='td'>{{item.A}}</view>
-              <view class='td'>{{item.B}}</view>
-              <view class='td'>￥{{item.C}}</view>
+              <view class='td'>{{item.materialtypename}}</view>
+              <view class='td'>{{item.count}}</view>
+              <view class='td'>{{item.unitpricecurrent}}</view>
+              <view class='td'>￥{{item.calculateMoney}}</view>
             </view>
             <view class='tr' wx:else>
-              <view class='td'>{{item.index}}</view>
-              <view class='td'>{{item.A}}</view>
-              <view class='td'>{{item.B}}</view>
-              <view class='td'>￥{{item.C}}</view>
+              <view class='td'>{{item.materialtypename}}</view>
+              <view class='td'>{{item.count}}</view>
+              <view class='td'>{{item.unitpricecurrent}}</view>
+              <view class='td'>￥{{item.calculateMoney}}</view>
             </view>
           </view>
         </view>
@@ -170,77 +252,102 @@
           共计：<text>{{lisData.length}}种材料 {{lisData.length}}项施工项目</text>
         </view> -->
         <view class='materials-totalMoney'>
-          订单总金额：￥<text>{{sum}}</text>元
+          订单总金额：￥
+          <text>{{sum}}</text>元
         </view>
       </view>
       <!--照片存档  -->
-      <view class='picture' animation="{{slide_up5}}">
-        <view class='materials-header'>图片</view>
+      <view  wx:if="{{lineItemStatus=='surveyfinish'|| lineItemStatus=='buildprepare'|| lineItemStatus=='surveycomfirm' || lineItemStatus=='buildfinish'}}" class='picture' animation="{{slide_up5}}">
+        <view class='materials-header'>照片存档</view>
         <view class='picture-img'>
-          <view class='img-wrap'  wx:for="{{imgs}}" wx:key="index" >
-            <image src='{{item}}'  data-src="{{item}}" mode="aspectFill" bindtap='previewImg'/>
+          <view class='img-wrap' wx:for="{{surveyFileList}}" wx:key="index">
+            <image src='{{item.url}}' data-src="{{item}}" mode="aspectFill" bindtap='previewImg' />
           </view>
         </view>
-        <view class='picture-text'>
+        <!-- <view class='picture-text'>
           <view style='white-space:nowrap;'> 备注信息：</view>
           <text>现场安装顺序</text>
-        </view>
-        
+        </view> -->
       </view>
+
+      <!--个人信息  -->
+      <view class='userInfo' animation="{{slide_up6}}">
+        <view class='materials-header'>车主信息</view>
+        <view class='userInfoWrap'>
+          <view class='userName'>
+            <text decode="{{true}}">车主：{{lineItemListCustom.name?lineItemListCustom.name:""}}&nbsp;&nbsp;{{lineItemListCustom.mobile?lineItemListCustom.mobile:""}}</text>
+          </view>
+          <view class='userSite'>
+            <view style='white-space:nowrap;'>地址：</view>
+            <view class='userSite-text'>{{lineItemListCustom.addrarea?lineItemListCustom.addrarea:""}}</view>
+            <view class='userSite-text'>{{lineItemListCustom.addrdetail?lineItemListCustom.addrdetail:""}}</view>
+          </view>
+        </view>
+      </view>
+      <!--车辆信息  -->
+      <view class='userInfo' animation="{{slide_up6}}">
+        <view class='materials-header'>车辆信息</view>
+        <view class='userInfoWrap'>
+          <view class='userName'>
+            <text decode="{{true}}">车辆型号：{{lineItemListCarmodel.name?lineItemListCarmodel.name:""}}&nbsp;&nbsp;</text>
+          </view>
+          <view class='userSite'>
+            <view style='white-space:nowrap;'>充电桩型号：</view>
+            <text class='userSite-text'>{{lineItemListPile.name?lineItemListPile.name:""}}</text>
+          </view>
+        </view>
+      </view>
+      
       <!--订单信息  -->
-      <view class='order' animation="{{slide_up6}}">
+      <view class='order' animation="{{slide_up7}}">
         <view class='materials-header'>订单信息</view>
-          <view class='orderInfo'>
-            
-            <view class='textWrap'>
-              <view class='textWrap-item'>下单时间：</view>
-              <view class='textWrap-item'>2018-01-3 08:10:33</view>
-            </view>
+
+        <view class='orderInfo' wx:if="{{lineItemStatus=='buildfinish'|| lineItemStatus=='buildconfirm' || lineItemStatus=='fileupload'}}">
+          <view class='textWrap'>
+            <view class='textWrap-item'>现场施工：</view>
+            <view class='textWrap-item'>{{survey.buildtime}}</view>
           </view>
-          <view class='orderInfo'>
-            <view class='textWrap'>
-              <view class='textWrap-item'>场勘时间：</view>
-              <view class='textWrap-item'>2018-01-3 08:10:33</view>
-            </view>
+        </view>
+
+
+        <view class='orderInfo' wx:if="{{lineItemStatus=='buildprepare'}}">
+          <view class='textWrap'>
+            <view class='textWrap-item'>已预约施工：</view>
+            <view class='textWrap-item'>{{survey.buildpreparecreatetime}}</view>
           </view>
-          <view class='orderInfo'>
-            <view class='textWrap'>
-              <view class='textWrap-item'>安装时间：</view>
-              <view class='textWrap-item'>2018-01-3 08:10:33</view>
-            </view>
+        </view>
+
+        <view class='orderInfo' wx:if="{{lineItemStatus=='surveyfinish' || lineItemStatus=='surveycomfirm' || lineItemStatus=='buildprepare' || lineItemStatus=='buildfinish' || lineItemStatus=='buildconfirm' || lineItemStatus=='fileupload'}}">
+          <view class='textWrap'>
+            <view class='textWrap-item'>现场勘测：</view>
+            <view class='textWrap-item'>{{survey.surveytime}}</view>
           </view>
-          <view class='orderInfo'>
-            <view class='textWrap'>
-              <view class='textWrap-item'>完成时间：</view>
-              <view class='textWrap-item'>2018-01-3 08:10:33</view>
-            </view>
+        </view>
+        <view class='orderInfo' wx:if="{{lineItemStatus=='surveyprepare'}}">
+          <view class='textWrap'>
+            <view class='textWrap-item'>预约场勘：</view>
+            <view class='textWrap-item'>{{survey.visittime}}</view>
           </view>
+        </view>
+        <view class='orderInfo' wx:if="{{orderInfo.createtime}}">
+          <view class='textWrap'>
+            <view class='textWrap-item'>订单录入：</view>
+            <view class='textWrap-item'>{{orderInfo.createtime}}</view>
+          </view>
+        </view>
       </view>
-      <!--服务评价  -->
-      <!-- <view class='serve' animation="{{slide_up7}}">
-        <view class='materials-header'>服务评价</view>
-        <view class='evaluate'>
-          安装速度：
-          <view  wx:for="{{scs}}" class='star-{{item}}' wx:key="index"></view>
-        </view>
-        <view class='evaluate'>
-          施工质量：
-          <view  wx:for="{{scs}}" class='star-{{item}}' wx:key="index"></view>
-        </view>
-        <view class='evaluate'>
-          服务态度：
-         <view  wx:for="{{scs}}" class='star-{{item}}' wx:key="index"></view>
-        </view>
-        <view class='evaluate'>
-          收费合理：
-         <view  wx:for="{{scs}}" class='star-{{item}}' wx:key="index"></view>
-        </view>
-        <view class='evaluate-text'>
-        <view style='white-space:nowrap;'> 评价：</view>
-        <text> 安装师傅耐心，工作细致到位，相信其他车主也会有相同的用户体验，关于价格方面，我查了和官网宣传一致，很诚信，希望你们会走得更远。</text>
-        </view>
-      </view> -->
     </view>
   </view>
 </view>
-<!-- <view style='width:100%; height:80rpx; background-color:#f5f5f5 padding-top:100rpx;'></view> -->
+
+ <!-- record	已录入
+ allocation	已派单
+ design	已指定场勘员
+ surveyprepare	已预约场勘
+ surveyfinish	已场勘
+ surveycomfirm	已审核场勘
+ buildprepare	已预约施工
+ buildfinish	已施工
+ buildconfirm	已确认施工
+ fileupload	资料已上传
+ cancel	订单取消 -->

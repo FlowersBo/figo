@@ -1,9 +1,0 @@
-<view class="section">
-  <view class="sectiontitle">选择城市</view>
-  <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-    <view class="picker">
-      当前选择：{{region[0]}}-{{region[1]}}-{{region[2]}}
-    </view>
-  </picker>
-</view>
-<button class='lgsq' bindtap='userSel'>确定选择</button>

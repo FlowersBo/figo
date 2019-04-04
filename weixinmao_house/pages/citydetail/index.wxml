@@ -1,5 +1,0 @@
-<!--weixinmao_house/pages/citydetail/index.wxml-->
-<view class="companytext">
-  <web-view src="{{siteRoots}}/wxapp/networkcity/html/{{ids}}"></web-view>
-</view>
-

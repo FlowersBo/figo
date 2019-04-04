@@ -1,0 +1,9 @@
+/* weixinmao_house/pages/shopping/shoppingDetails/index.wxss */
+.banner{
+  width: 100%;
+  height: 400rpx;
+}
+.slide-image {
+  width:100%;
+  height:100%;
+  }

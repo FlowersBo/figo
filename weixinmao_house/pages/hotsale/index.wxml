@@ -1,22 +1,17 @@
-<!--weixinmao_house/pages/hotsale/index.wxml-->
-<!-- <view class="citylist">
-  <view class="list">
-      <image class="bg" src="../../resource/images/foc.jpg"></image>
-      <view class="textbox">
-        <view class="citytitle">暑期优惠季节！！！</view>
-        <view class="citytitle">北京idc机房...</view>
-      </view>
+ 
+ <!--资讯-->
+    <view class="news">
+      <block  wx:if="{{idcList}}">
+        <view class='list'  data-id="{{item.ids}}" bindtap='toSailDetail' wx:for="{{idcList}}" wx:key="index" wx:for-item="item">
+          <view class='listWrap'> 
+            <view class='newsWrap'>
+              <view class='list-text'>{{item.title}}</view>
+              <text class='time'>{{item.updatetime}}</text>
+            </view>
+            <view class='list-img'>
+              <image src="{{item.background}}"/>
+            </view>
+          </view>
+        </view>
+      </block>
     </view>
-  </view> -->
-<view class="hotSailList">  
-<block wx:if="{{hotSailList}}">
-  <view class="list"  wx:for="{{hotSailList}}" wx:key="index" wx:for-item="item">
-      <image class="bg" src="{{siteRoots}}{{item.background}}" data-id="{{item.ids}}" bindtap='goHotDdetail' ></image>
-      <view class="textbox">
-        <view class="citytitle">{{item.title}}</view>
-        <view class="citytitle">{{item.des}}</view>
-      </view>
-    </view>
- </block>
-</view> 
-

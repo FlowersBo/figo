@@ -1,32 +1,48 @@
-/* weixinmao_house/pages/hotsale/index.wxss */
-.hotSailList{
-  display: flex;
-  min-height:100%; 
-  flex-flow:column wrap;
-  overflow: hidden;
-}
-.hotSailList .list{
-  position: relative;
-  flex-grow: 1;
+page{
   width: 100%;
-  height:300rpx;
-  padding:10rpx 15rpx;
+  height: 100%;
+  background-color: #f5f5f5;
+  color: #666;
 }
-.hotSailList .list .bg{
-  position: absolute;
-  z-index:98;
-  width: 718rpx;
-  height:300rpx;
-  padding: 0 5rpx;
+/* 资讯 */
+.list{
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 2rpx solid #ddd;
 }
-.textbox{
-  position: absolute;
-  z-index:99;
-  color:#ffffff;
-  left:60rpx;
-  top:60rpx;
+.list:first-child{
+  margin-top: 30rpx;
 }
-.textbox .citytitle:nth-child(2){
-  font-size: .7rem;
-  color:#ffffff;
+.listWrap{
+  display: flex;
+  width: 96%;
+  margin: auto;
+  padding: 20rpx 0;
+}
+.newsWrap{
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+.list-text{
+  font-size: 30rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.newsWrap .time{
+  color: #aaa;
+  font-size: 24rpx;
+  margin-top: 24rpx;
+}
+
+.list-img{
+  width: 35%;
+  height: 150rpx;
+}
+.list-img image{
+  width: 100%;
+  height: 100%;
 }

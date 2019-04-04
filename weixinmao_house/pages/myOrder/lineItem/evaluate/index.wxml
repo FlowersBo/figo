@@ -1,0 +1,42 @@
+<!--weixinmao_house/pages/myOrder/lineItem/evaluate/index.wxml-->
+<!-- 追评 -->
+      <view class='bigWrap'  style='padding:15rpx 0 0 0;'>
+       <form  bindsubmit="formSubmit1">
+          <view class='materials-header'>追加一下你的使用体验吧~</view>
+          <view>
+            <view style='margin-top:6rpx;'>
+              <view class="conts">
+                <textarea class="areas" placeholder="{{icon}}" minlength="{{min}}" maxlength="{{max}}" bindinput="input"> 
+                  <text class="currentWordNumber">{{currentWordNumber|0}}/{{max}}</text>
+                  <text class="hint">{{texts}}</text>
+                </textarea>
+              </view>
+              <view class="weui-cell">
+                <view class="weui-cell__bd">
+                  <view class="weui-uploader">
+                    <view class="weui-uploader__hd">
+                      <view class="weui-uploader__title">点击可预览选好的图片</view>
+                      <view class="weui-uploader__info">{{uploadPics.length}}/4</view>
+                    </view>
+                    <view class="weui-uploader__bd">
+                      <view class="weui-uploader__files">
+                         <block wx:for="{{uploadPics}}" wx:for-item="item" wx:key="{{index}}">
+                            <view class="weui-uploader__file">
+                              <image class="weui-uploader__img" src="{{item.url}}" data-src="{{item.url}}" mode="aspectFill" bindtap="previewImage"></image>
+                              <view class="image-remover" data-key="{{item.key}}" data-index='{{index}}' bindtap="removeImage">删除</view>
+                            </view>
+                          </block>
+                      </view>
+                      <!-- isShow 这个是判断是否进行触发点隐藏操作-->
+                      <view class="weui-uploader__input-box ">
+                        <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <button class='evaluates-btn' formType="submit">提交评价</button>
+          </view>
+        </form>
+      </view>

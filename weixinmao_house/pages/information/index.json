@@ -1,7 +1,4 @@
 {
   "navigationBarTitleText": "我要立桩",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "select": "/weixinmao_house/pages/componet/select/select"
-  }
+  "enablePullDownRefresh": true
 }

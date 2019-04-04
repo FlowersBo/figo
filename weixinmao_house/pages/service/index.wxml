@@ -1,0 +1,15 @@
+
+<view class='list_box' wx:for='{{list}}' wx:key='this' wx:for-item='parentItem' wx:for-index='parentIndex' >
+    <view class='list'>
+        <view class='list_name_box' catchtap='listTap' data-parentindex='{{parentIndex}}'>
+          <view>
+            <icon class="iconfont icon {{parentItem.icon}};" ></icon>
+            <text class='list_item_name'>{{parentItem.listName}}</text>
+          </view>
+          <view class='you'>
+            <icon class="iconfont icon-iconfontyoujiantou-copy;" style='font-size:24rpx;margin-right: 5rpx;margin-top:-15rpx;'></icon>   
+          </view>
+            <!-- <image src='/weixinmao_house/resource/images/typeface/bottom.jpg' class='icon_down {{parentItem.show&&"icon_down_rotate"}}'></image> -->
+        </view> 
+    </view>
+</view>

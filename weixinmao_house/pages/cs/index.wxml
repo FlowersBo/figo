@@ -1,0 +1,9 @@
+ <!-- 跑马灯效果  -->
+    <view class="example">
+        <text class='gg'>公告：</text>
+      <view class="marquee_box">
+        <view class="marquee_text" style="{{orientation}}:{{marqueeDistance}}px;font-size: {{size}}px;">
+          {{text}}
+        </view>
+      </view>
+    </view>
